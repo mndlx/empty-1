@@ -1,0 +1,1 @@
+Test sulle skill di un agent
