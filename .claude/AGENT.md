@@ -1,1 +1,50 @@
-You are an AI engineer. Build a single-page application (SPA) in React with TypeScript that integrates with Keycloak for authentication and calls the Core Service and Approval Manager. 1. Authentication: Use keycloak-js or React Keycloak adapter pointed at https://identity.vlabstudio.net/realms/virtual-system. Implement login, logout, and token refresh. 2. Task Management UI: After login, fetch GET /tasks from the Core Service, filtering by OwnerID for regular users. Display tasks in a list/table. Provide forms to create (POST /tasks), edit (PUT /tasks/:id), and delete (DELETE /tasks/:id) tasks. 3. Approval UI: If the user’s token contains role ‘Manager’ or ‘Approver’, fetch or filter tasks with status Pending and display an Approve button. On click, call POST /tasks/:id/approve on the Approval Manager. Update UI state on success. 4. State Management: Use React Context or Redux to hold auth and tasks state. 5. Styling & UX: Use a component library such as Material-UI or Bootstrap. Ensure responsive design. 6. Testing: Write unit tests with Jest and React Testing Library for components and flows. 7. Documentation: Include a README with instructions to install, run (`npm start`), and build (`npm build`). Provide environment variable examples for Keycloak client ID and API base URLs. 8. Local Dev Setup: Provide an .env.example file for API endpoints and Keycloak config.
+You are an AI agent tasked with building the MarketStock.FrontendApp using React and TypeScript. Follow these instructions:
+
+1. Project Setup
+   • Initialize a new React project (using Create React App or Vite) named marketstock-frontend with TypeScript support.
+   • Configure ESLint, Prettier, and Husky for code quality and pre-commit hooks.
+
+2. Architecture & State Management
+   • Organize code into src/components, src/pages, src/services, src/hooks, and src/types.
+   • Use React Router for navigation.
+   • Choose a state management solution (Context API or Redux Toolkit) to manage global state: products, stock transactions, and restock orders.
+
+3. UI Components & Pages
+   • ProductsListPage: fetch and display all products with columns for name, stock level, expiration status, and low-stock indicator. Include filter for expired/low-stock.
+   • ProductFormPage: form to create or edit products (name, description, expiration date, reorder threshold).
+   • StockMovementPage: two separate forms or tabs for stock in and stock out operations.
+   • RestockOrderPage:
+     – List existing restock orders.
+     – Form to place a new restock order (select product, enter quantity).
+
+4. API Integration
+   • Create a service layer (src/services/api.ts) using Axios or fetch:
+     – GET /api/products
+     – GET /api/products/{id}
+     – POST /api/products
+     – PUT /api/products/{id}
+     – POST /api/products/{id}/stock/in
+     – POST /api/products/{id}/stock/out
+     – GET /api/restock-orders
+     – POST /api/restock-orders
+     – PUT /api/restock-orders/{id}
+   • Handle loading states, errors, and success notifications.
+
+5. Styling & UX
+   • Use a component library like Material-UI or Bootstrap for consistent styling.
+   • Show visual indicators for expired products (e.g., red highlight) and low-stock items (e.g., yellow badge).
+   • Add form validation and user feedback on success/failure.
+
+6. Testing & Deploy
+   • Write unit tests for critical components using Jest and React Testing Library.
+   • Set up a GitHub Actions workflow (.github/workflows/frontend-ci.yml) to:
+     – Install dependencies
+     – Run lint, format checks
+     – Run unit tests
+     – Build the production bundle
+
+7. Environment & Deployment
+   • Use environment variables for the backend API base URL.
+   • Provide instructions or scripts to deploy the built frontend to a static hosting service (e.g., Netlify, Vercel, AWS S3 + CloudFront).
+
+Deliver the complete React TypeScript frontend in a Git repository ready for deployment.
